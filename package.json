@@ -1,0 +1,17 @@
+{
+  "name": "@eslym/hugeicons-svelte",
+  "module": "index.ts",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eslym/hugeicons-svelte.git"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "hugeicons-react": "^0.2.0",
+    "js-convert-case": "^4.2.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
