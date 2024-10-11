@@ -1,9 +1,8 @@
 # @eslym/hugeicons-svelte
 
-> [!IMPORTANT]
-> This is not an official package, it generate a svelte component for
-> and icons from free version of [HugeIcons](https://hugeicons.com/)
-> ([hugeicons-react](https://www.npmjs.com/package/hugeicons-react)).
+> [!WARNING]
+> [HugeIcons](https://hugeicons.com/) already have official package for svelte,
+> so please use [hugeicons-svelte](https://www.npmjs.com/package/hugeicons-svelte) instead.
 
 ## Install
 
