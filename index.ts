@@ -60,6 +60,7 @@ export type IconProps = Omit<
 `;
 
 for (const [name, data] of Object.entries(icons)) {
+  const filename = toKebabCase(name);
   const lines = [];
   const dts = [
     'import { Component } from "svelte";',
@@ -76,9 +77,9 @@ for (const [name, data] of Object.entries(icons)) {
     lines.push(`<${child[0]} ${attrs.join(" ")} />`);
   }
   const code = template.replace("<!-- ICONS -->", lines.join("\n"));
-  await Bun.write(resolve(destPath, `icons/${name}.svelte`), code);
-  await Bun.write(resolve(destPath, `icons/${name}.svelte.d.ts`), dts.join("\n"));
-  index.push(`export { default as ${name} } from "./icons/${name}.svelte";`);
+  await Bun.write(resolve(destPath, `icons/${filename}.svelte`), code);
+  await Bun.write(resolve(destPath, `icons/${filename}.svelte.d.ts`), dts.join("\n"));
+  index.push(`export { default as ${name} } from "./icons/${filename}.svelte";`);
 }
 
 await Bun.write(resolve(destPath, "index.mjs"), index.join("\n"));
