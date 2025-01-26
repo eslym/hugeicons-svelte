@@ -1,12 +1,12 @@
 <script>
   let {
-    size,
+    size = 24,
     "stroke-width": strokeWidth = 1.5,
     "stroke-linecap": strokeLinecap = 'round',
     "stroke-linejoin": strokeLinejoin = 'round',
     color = "currentColor",
     ...restProps
-  }: IconProps = $props();
+  } = $props();
 </script>
 
 <svg
