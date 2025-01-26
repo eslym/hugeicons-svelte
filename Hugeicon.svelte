@@ -1,11 +1,14 @@
-<script>
-  export let icon;
+<script lang="ts">
+  import type { SVGAttributes } from 'svelte/elements';
 
-  $: size = $$restProps.size || 24;
-  $: strokeWidth = $$restProps["stroke-width"] || 1.5;
-  $: strokeLinecap = $$restProps["stroke-linecap"] || "round";
-  $: strokeLinejoin = $$restProps["stroke-linejoin"] || "round";
-  $: color = $$restProps.color || "currentColor";
+  type IconsProps = Omit<
+    SVGAttributes<SVGElement>,
+    'width' | 'height' | 'viewbox' | 'fill' | 'xmlns'
+  > & {
+      size?: number | string;
+  };
+
+  let { size, strokeWidth, strokeLinecap, strokeLinejoin, color, ...$$restProps }: IconsProps = $props();
 </script>
 
 <svg
@@ -21,7 +24,5 @@
   {color}
   {...$$restProps}
 >
-  {#each icon as elements}
-    <svelte:element this={elements[0]} {...elements[1]} />
-  {/each}
+<!-- ICONS -->
 </svg>
