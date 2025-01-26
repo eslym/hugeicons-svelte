@@ -63,7 +63,7 @@ for (const [name, data] of Object.entries(icons)) {
   const lines = [];
   const dts = [
     'import { Component } from "svelte";',
-    'import { IconProps } from "./index";',
+    'import { IconProps } from "../index";',
     `declare const ${name}: Component<IconProps, {}, "">;`,
     `export default ${name};`,
   ];
