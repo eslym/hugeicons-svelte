@@ -1,7 +1,7 @@
 {
   "name": "@eslym/hugeicons-svelte",
   "module": "index.ts",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "type": "module",
   "repository": {
     "type": "git",

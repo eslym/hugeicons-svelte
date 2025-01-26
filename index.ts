@@ -49,8 +49,24 @@ const template = await Bun.file(resolve(import.meta.dir, "Hugeicon.svelte")).tex
 
 const index = [];
 
+const dts = `import type { SVGAttributes } from 'svelte/elements';
+export type IconProps = Omit<
+  SVGAttributes<SVGElement>,
+  'width' | 'height' | 'viewbox' | 'fill' | 'xmlns'
+> & {
+    size?: number | string;
+};
+
+`;
+
 for (const [name, data] of Object.entries(icons)) {
   const lines = [];
+  const dts = [
+    'import { Component } from "svelte";',
+    'import { IconProps } from "./index";',
+    `declare const ${name}: Component<IconProps, {}, {}>;`,
+    `export default ${name};`,
+  ];
   for (const child of data.definitions) {
     const attrs: any = [];
     for (const key in child[1]) {
@@ -61,10 +77,14 @@ for (const [name, data] of Object.entries(icons)) {
   }
   const code = template.replace("<!-- ICONS -->", lines.join("\n"));
   await Bun.write(resolve(destPath, `icons/${name}.svelte`), code);
+  await Bun.write(resolve(destPath, `icons/${name}.svelte.d.ts`), dts.join("\n"));
   index.push(`export { default as ${name} } from "./icons/${name}.svelte";`);
 }
 
 await Bun.write(resolve(destPath, "index.mjs"), index.join("\n"));
+await Bun.write(resolve(destPath, "index.d.ts"), dts + index.join("\n"));
+
+await Bun.$`cp README.md ${destPath}`;
 
 await Bun.write(
   resolve(destPath, "package.json"),
@@ -74,6 +94,7 @@ await Bun.write(
       repository,
       version,
       exports: {
+        types: "./index.d.ts",
         svelte: "./index.mjs",
       },
     },

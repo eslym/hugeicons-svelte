@@ -2,7 +2,8 @@
 
 > [!WARNING]
 > This is not the offcial [HugeIcons](https://hugeicons.com/) package.
-> but somehow the official [hugeicons-svelte](https://www.npmjs.com/package/hugeicons-svelte) is gone.
+> But somehow the official [hugeicons-svelte](https://www.npmjs.com/package/hugeicons-svelte) is gone.
+> So this package is unarchived to provide the same functionality.
 
 ## Install
 
@@ -26,8 +27,8 @@ bun add -D @eslym/hugeicons-svelte
 
 ```svelte
 <script>
-  import { Hugeicon, GithubIcon } from '@eslym/hugeicons-svelte';
+  import { GithubIcon } from '@eslym/hugeicons-svelte';
 </script>
 
-<Hugeicon icon={GithubIcon}>
+<GithubIcon/>
 ```
