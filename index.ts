@@ -6,7 +6,7 @@
  */
 import { resolve } from "path";
 import { toKebabCase } from "js-convert-case";
-import { name, repository, version } from "./package.json";
+import { name, repository } from "./package.json";
 
 const destPath = resolve(import.meta.dir, "dist");
 
@@ -64,7 +64,7 @@ for (const [name, data] of Object.entries(icons)) {
   const dts = [
     'import { Component } from "svelte";',
     'import { IconProps } from "./index";',
-    `declare const ${name}: Component<IconProps, {}, {}>;`,
+    `declare const ${name}: Component<IconProps, {}, "">;`,
     `export default ${name};`,
   ];
   for (const child of data.definitions) {
@@ -85,6 +85,8 @@ await Bun.write(resolve(destPath, "index.mjs"), index.join("\n"));
 await Bun.write(resolve(destPath, "index.d.ts"), dts + index.join("\n"));
 
 await Bun.$`cp README.md ${destPath}`;
+
+const version = Bun.env.GITHUB_REF?.replace("refs/tags/v", "") ?? "0.0.0";
 
 await Bun.write(
   resolve(destPath, "package.json"),
